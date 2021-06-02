@@ -21,7 +21,6 @@ var ReminderSchema = new mongoose.Schema({
   },
   title: String,
   message: String,
-  footer: String,
   sended: Boolean,
 });
 

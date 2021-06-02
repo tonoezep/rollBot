@@ -55,7 +55,9 @@ client.on("message", (message) => {
     const args = message.content.slice(prefix.length).trim().split(" ");
     const command = args.shift().toLowerCase();
     if (!client.commands.has(command)) {
-      message.reply(`ANTA BAKA! \n${command} doesn't make any sense to me!`);
+      message.reply(
+        `command :${command} not found, use help to list the commands!`
+      );
       return;
     }
 
@@ -75,7 +77,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   const { name } = reaction.emoji;
   if (!client.reactions.has(name)) {
     //Early return if not reaction found
-    console.log(`${name} reaction not found`);
+    // console.log(`${name} reaction not found`);
     return;
   }
   if (reaction.partial) {

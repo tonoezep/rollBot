@@ -1,22 +1,5 @@
 const Reminder = require("../models/reminder").Reminder;
 
-const strTxt = [
-  "B-Baka!",
-  "ANTA BAKA!",
-  "If I feel like it, AHO!",
-  "God, you are so useless!",
-];
-
-const endTxt = [
-  "B-Baka!",
-  "ANTA BAKA!",
-  "I...It's not like I wanted to remind you or anything like that, I just hapenned to have time",
-  "I- I reminded you by chance,  Don't get the wrong idea, BAKA!",
-  "I- I just remembered by chance, Don't get the wrong idea!",
-  "I- It's not like I'm doing this for you!",
-  "You better be grateful, AHO!",
-];
-
 const getTimeToRemind = (timeInput = "5") => {
   let unitName,
     ms,
@@ -50,23 +33,20 @@ module.exports = {
     const randomEndText = endTxt[Math.floor(Math.random() * endTxt.length)];
     const randomStrText = strTxt[Math.floor(Math.random() * strTxt.length)];
 
-    const createEmbedMsg = (title, msg, timestamp = "") =>
+    const createEmbedMsg = (title, msg) =>
       new Discord.MessageEmbed()
         .setColor(`#${randomColor}`)
         .setTitle(title)
-        .setDescription(msg)
-        .setFooter(timestamp);
+        .setDescription(msg);
 
     const remindStart = createEmbedMsg(
       "Reminder setted",
-      `I'll remind you in ${remindTime.unit} ${remindTime.unitName}.`,
-      `- ${randomStrText}`
+      `I'll remind you in ${remindTime.unit} ${remindTime.unitName}.`
     );
 
     const remindEndMsg = createEmbedMsg(
       `Reminder: ${remindText}`,
-      `${remindTime.unit} ${remindTime.unitName} ago.`,
-      ` - ${randomEndText}`
+      `${remindTime.unit} ${remindTime.unitName} ago.`
     );
 
     message.channel.send(remindStart);
@@ -84,7 +64,6 @@ module.exports = {
       guild_id: message.guild.id,
       title: `Reminder: ${remindText}`,
       message: `${remindTime.unit} ${remindTime.unitName} ago.`,
-      footer: ` - ${randomEndText}`,
       sended: false,
     });
 
